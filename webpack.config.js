@@ -20,6 +20,10 @@ module.exports = {
             filename: "./index.html"
         })
     ],
+    resolve: {
+        modules: ["node_modules"],
+        extensions: [".js", ".jsx"],
+    },
     devServer: {
         contentBase: path.join(__dirname, "/app"),
         compress: true,

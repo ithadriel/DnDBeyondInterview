@@ -1,15 +1,23 @@
-import React from 'React';
-import {shallow, mount} from 'enzyme';
-import { App } from '../app/App'
+import React from "react";
+import { shallow, } from "enzyme";
+import { App, } from "../app/App";
+import { Header, } from "../app/components/Header";
+import { TalentCalculator, } from "../app/components/TalentCalculator";
 
-jest.unmock('../app/App');
+jest.unmock("../app/App");
 
-describe('App', () => {
-    it('should say Hello World', () => {
-        const tree = shallow(<App/>);
+describe("App", () => {
+    let tree;
 
-        console.log(tree.debug());
+    beforeEach(() => {
+        tree = shallow(<App/>);
+    });
+    
+    it("should render a Header component", () => {
+        expect(tree.find(Header).exists()).toBe(true);
+    });
 
-         expect(tree.find('#helloWorld').text()).toEqual('Hello World');
+    it("should render the TalentCalculator component", () => {
+        expect(tree.find(TalentCalculator).exists()).toBe(true);    
     });
 });

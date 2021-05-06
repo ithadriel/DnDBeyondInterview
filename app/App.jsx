@@ -1,8 +1,13 @@
 import "./index.css";
-import React from 'React';
+import React from "react";
+import { Header, } from "./components/Header";
+import { TalentCalculator, } from "./components/TalentCalculator";
 
-export class App extends React.Component {
-    render(){
-        return <div id="helloWorld">Hello World</div>;
-    }
+export const App = () => {
+    return (
+        <div>
+            <Header/>
+            <TalentCalculator/>
+        </div>
+    );
 };
