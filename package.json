@@ -1,0 +1,52 @@
+{
+  "name": "React Skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "start": "webpack-dev-server --open --mode=development"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.4.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
+    "jest-enzyme": "^7.1.2",
+    "jsdom": "^15.2.1",
+    "style-loader": "^1.0.2",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "automock": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-tests.js"
+    ],
+    "resetMocks": true,
+    "unmockedModulePathPatterns": [
+      "node_modules"
+    ]
+  }
+}
