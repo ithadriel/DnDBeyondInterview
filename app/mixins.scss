@@ -1,4 +1,4 @@
-$smBreakpoint: 850px;
+$smBreakpoint: 875px;
 
 @mixin sm {
   @media (max-width: #{$smBreakpoint}) {

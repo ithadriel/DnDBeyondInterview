@@ -49,12 +49,14 @@ module.exports = (env) => {
                 }
             ],
         },
-        mode: 'development',
+        mode: isDevelopment ? 'development' : 'production',
         plugins: [
             new HtmlWebpackPlugin({
                 template: './app/index.html',
-                filename: "./index.html"
-            })
+                filename: "./index.html",
+                favicon: "./app/assets/favicon.png",
+            }),
+            new MiniCssExtractPlugin(),
         ],
         resolve: {
             modules: ["node_modules", path.join(__dirname, "app/assets")],

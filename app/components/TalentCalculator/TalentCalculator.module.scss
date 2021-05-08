@@ -37,15 +37,18 @@
 }
 
 .divider {
-  height: 10px;
-  width: 80px;
+  height: 12px;
+  width: 100px;
   background-color: rgb(26, 28, 28);
-  border-bottom: 1px solid rgb(31, 32, 33);
-  border-top: 1px solid rgb(31, 32, 33);
-  
+  border-bottom: 2px solid rgb(31, 32, 33);
+  border-top: 2px solid rgb(31, 32, 33);
   @include sm {
-    width: 10px;
-    height: 80px;
+    width: 14px;
+    height: 100px;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 2px solid rgb(31,32,33);
+    border-right: 2px solid rgb(31,32,33);
   }
 }
 
