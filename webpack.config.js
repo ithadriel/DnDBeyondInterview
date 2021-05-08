@@ -8,7 +8,7 @@ module.exports = (env) => {
         entry: './app/index.js',
         output: {
             path: path.resolve(__dirname, 'dist'),
-            filename: 'index_bundle.js'
+            filename: isDevelopment ? 'index_bundle.js' : 'index_bundle.[contenthash].js'
         },
         module: {
             rules: [
