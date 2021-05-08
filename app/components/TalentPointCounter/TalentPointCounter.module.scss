@@ -1,0 +1,36 @@
+@import "../../mixins.scss";
+
+.talentCounterContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.talentCounter {
+  background-color: rgb(8,12,13);
+  border: 1px solid rgb(15,18,19);
+  width: 198px;
+  height: 98px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include sm {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+@mixin pointCounterText {
+  font-size: 24px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.pointText {
+  color: rgb(57, 80, 101);
+  @include pointCounterText;
+}
+
+.pointCounter {
+  @include pointCounterText;
+}

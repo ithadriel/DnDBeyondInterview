@@ -18,6 +18,10 @@ module.exports = {
     "plugins": [
         "react",
     ],
+    "globals": {
+        "process": "writable",
+        "module": "writable",
+    },
     "rules": {
         "indent": [
             "error",

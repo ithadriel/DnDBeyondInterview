@@ -1,7 +1,7 @@
-import "./index.css";
+import "./index.scss";
 import React from "react";
-import { Header, } from "./components/Header";
-import { TalentCalculator, } from "./components/TalentCalculator";
+import { Header, } from "./components/Header/Header";
+import { TalentCalculator, } from "./components/TalentCalculator/TalentCalculator";
 
 export const App = () => {
     return (

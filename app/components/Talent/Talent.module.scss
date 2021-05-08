@@ -1,0 +1,51 @@
+$topGrey: rgb(81,81,81);
+$midGrey: rgb(56,56,56);
+$bottomGrey: rgb(77,77,77);
+
+.talent {
+  height: 58px;
+  width: 58px;
+  border-image: linear-gradient(to bottom, $topGrey, $topGrey 50%, $midGrey 51%, $bottomGrey) 1;
+  border-width: 4px;
+  background-image: url("talent-icons-sprite.png");
+  background-position-y: -50px;
+  &:disabled {
+    background-color: black;
+  }
+  &:hover {
+    background-position-y: 0;
+    cursor: pointer;
+  }
+}
+
+.stack {
+  background-position-x: 0;
+}
+
+.utensils {
+  background-position-x: -50px;
+}
+
+.cake {
+  background-position-x: -100px;
+}
+
+.crown {
+  background-position-x: -150px;
+}
+
+.mask {
+  background-position-x: -200px;
+}  
+
+.scuba {
+  background-position-x: -250px;
+}
+
+.lightning {
+  background-position-x: -300px;
+}
+
+.skull {
+  background-position-x: -350px;
+}

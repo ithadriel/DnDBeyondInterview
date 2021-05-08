@@ -1,41 +1,49 @@
 {
-  "name": "Front-End-Challenge",
+  "name": "frontendchallenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "Front End Challenge from DnD Beyond",
   "main": "index.js",
+  "repository": "https://github.com/ithadriel/DnDBeyondInterview",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
-    "start": "webpack-dev-server --open --mode=development"
+    "build": "webpack --env production",
+    "start": "webpack serve"
   },
   "keywords": [],
-  "author": "",
+  "author": "Michael Spittler (ithadriel)",
   "license": "MIT",
   "dependencies": {
+    "classnames": "^2.3.1",
+    "mini-css-extract-plugin": "^1.6.0",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.32.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-react": "^7.7.4",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.4.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "enzyme": "^3.11.0",
     "eslint": "^7.25.0",
     "eslint-plugin-react": "^7.23.2",
-    "html-webpack-plugin": "^3.2.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
+    "jest-each": "^26.6.2",
     "jest-enzyme": "^7.1.2",
-    "jsdom": "^15.2.1",
-    "style-loader": "^1.0.2",
-    "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "jsdom": "^16.5.3",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "babel": {
     "presets": [
@@ -52,6 +60,9 @@
     "resetMocks": true,
     "unmockedModulePathPatterns": [
       "node_modules"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(scss)$": "identity-obj-proxy"
+    }
   }
 }

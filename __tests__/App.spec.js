@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow, } from "enzyme";
 import { App, } from "../app/App";
-import { Header, } from "../app/components/Header";
-import { TalentCalculator, } from "../app/components/TalentCalculator";
+import { Header, } from "../app/components/Header/Header";
+import { TalentCalculator, } from "../app/components/TalentCalculator/TalentCalculator";
 
 jest.unmock("../app/App");
 

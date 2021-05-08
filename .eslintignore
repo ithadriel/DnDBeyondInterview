@@ -1,3 +1,4 @@
 dist
 webpack.config.js
 setup-tests.js
+__mocks__/styleMock.js

@@ -1,0 +1,66 @@
+@import "../../mixins.scss";
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  @include sm {
+    flex-direction: row;
+    flex-basis: 70%;
+    justify-content: space-around;
+  }
+}
+
+.calculatorContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 32px;
+}
+
+.pathLabel {
+  margin-right: 45px;
+  font-size: 12px;
+  
+  @include sm {
+    margin: 0 0 16px 0;
+  }
+}
+
+.talentContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 56px 0;
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.divider {
+  height: 10px;
+  width: 80px;
+  background-color: rgb(26, 28, 28);
+  border-bottom: 1px solid rgb(31, 32, 33);
+  border-top: 1px solid rgb(31, 32, 33);
+  
+  @include sm {
+    width: 10px;
+    height: 80px;
+  }
+}
+
+.selected + .divider {
+  background-color: rgb(47, 48, 50);
+  border-bottom: 1px solid rgb(63, 63, 65);
+  border-top: 1px solid rgb(63, 63, 65);
+}
+
+$topBlue: rgb(111, 166, 221);
+$midBlue: rgb(39, 57, 73);
+$bottomBlue: rgb(100, 151, 201);
+
+.selected {
+  border-image: linear-gradient(to bottom, $topBlue, $topBlue 50%, $midBlue 51%, $bottomBlue) 1;
+  box-shadow: 0 0 5px 1px #555555;
+  background-position-y: 0;
+}
