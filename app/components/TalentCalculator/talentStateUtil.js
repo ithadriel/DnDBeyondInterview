@@ -15,15 +15,26 @@ const SELECTED_TALENT = {
     selected: true,
 };
 
-const updateTalentState = (oldState, keyToSelect, keyToEnable, keysToDisable) => {
+const ADJACENCIES = {
+    stack: ["utensils", "cake", "crown",],
+    utensils: ["cake", "crown",],
+    cake: ["crown",],
+    crown: [],
+    mask: ["scuba", "lightning", "skull",],
+    scuba: ["lightning", "skull",],
+    lightning: ["skull",],
+    skull: [],
+};
+
+const removeTalent = (oldState, deselectedTalent, subsequentTalents) => {
     let potentiallyEnabledKeys = {};
-    if(oldState.availablePoints === 0 && !keyToSelect){ 
+    if (oldState.availablePoints === 0) {
         //if we're getting points back from 0, we need to re-enable the skills we disabled before
         oldState.zeroPointsLeftDisabledSkills.forEach((talent) => {
             potentiallyEnabledKeys[talent] = ENABLED_TALENT;
         });
     }
-    const disabledKeys = keysToDisable.map((key) => ({
+    const disabledKeys = subsequentTalents.map((key) => ({
         [key]: DISABLED_TALENT,
     })).reduce((acc, val) => ({
         ...acc,
@@ -34,20 +45,27 @@ const updateTalentState = (oldState, keyToSelect, keyToEnable, keysToDisable) =>
         ...oldState,
         ...potentiallyEnabledKeys,
         ...disabledKeys,
+        [deselectedTalent]: ENABLED_TALENT,
         zeroPointsLeftDisabledSkills: [],
     };
-    if(keyToEnable){
+    let numSelectedTalents = Object.values(newState) //since we don't know how many talents we removed,
+        .filter((v) => (v.selected)).length; // we count the number of talents where selected is truthy in newState
+    newState.availablePoints = INITIALLY_AVAILABLE_TALENT_POINTS - numSelectedTalents;
+
+    return newState;
+};
+
+const addTalent = (oldState, keyToSelect, keyToEnable) => {
+    let newState = {
+        ...oldState,
+        [keyToSelect]: SELECTED_TALENT,
+        availablePoints: oldState.availablePoints - 1,
+    };
+    if (keyToEnable) {
         newState[keyToEnable] = ENABLED_TALENT;
     }
-    if (keyToSelect) {
-        newState[keyToSelect] = SELECTED_TALENT;
-    }
-    let numSelectedTalents = Object.values(newState)
-        .map((v) => (v.selected))
-        .filter((v) => v).length; // count the number of talents where selected is truthy
-    newState.availablePoints = INITIALLY_AVAILABLE_TALENT_POINTS - numSelectedTalents;
     
-    if(newState.availablePoints === 0){
+    if (newState.availablePoints === 0) {
         //disable remaining talents
         Object.keys(newState).filter((key) => {
             return newState[key].enabled && !newState[key].selected;
@@ -59,72 +77,21 @@ const updateTalentState = (oldState, keyToSelect, keyToEnable, keysToDisable) =>
     return newState;
 };
 
+
 const canBeAdded = (state, key) => {
     return !state[key].selected && state[key].enabled && state.availablePoints > 0;
 };
 
 export const talentReducer = (state, action) => {
-    switch (action.type) {
-    case "stack":
-        if (action.desiredAction === "add" && canBeAdded(state, "stack")) {
-            return updateTalentState(state, action.type, "utensils", []);
+    if (Object.keys(ADJACENCIES).includes(action.type)) {
+        if (action.desiredAction === "add" && canBeAdded(state, action.type)) {
+            return addTalent(state, action.type, ADJACENCIES[action.type][0]);
         } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["utensils", "cake", "crown",]);
+            return removeTalent(state,  action.type, ADJACENCIES[action.type]);
         }
-        return state;
-    case "utensils":
-        if (action.desiredAction === "add" && canBeAdded(state, "utensils")) {
-            return updateTalentState(state, action.type, "cake", []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["cake", "crown",]);
-        }
-        return state;
-    case "cake":
-        if (action.desiredAction === "add" && canBeAdded(state, "cake")) {
-            return updateTalentState(state, action.type, "crown", []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["crown",]);
-        }
-        return state;
-    case "crown":
-        if (action.desiredAction === "add" && canBeAdded(state, "crown")) {
-            return updateTalentState(state, action.type, undefined, []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, []);
-        }
-        return state;
-    case "mask":
-        if (action.desiredAction === "add" && canBeAdded(state, "mask")) {
-            return updateTalentState(state, action.type, "scuba", []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["scuba", "lightning", "skull",]);
-        }
-        return state;
-    case "scuba":
-        if (action.desiredAction === "add" && canBeAdded(state, "scuba")) {
-            return updateTalentState(state, action.type, "lightning", []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["lightning", "skull",]);
-        }
-        return state;
-    case "lightning":
-        if (action.desiredAction === "add" && canBeAdded(state, "lightning")) {
-            return updateTalentState(state, action.type, "skull", []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, ["skull",]);
-        }
-        return state;
-    case "skull":
-        if (action.desiredAction === "add" && canBeAdded(state, "skull")) {
-            return updateTalentState(state, action.type, undefined, []);
-        } else if (action.desiredAction === "remove") {
-            return updateTalentState(state, undefined, action.type, []);
-        }
-        return state;
-    default:
-        //no-op
         return state;
     }
+    return state;
 };
 
 export const initialTalentState = {
